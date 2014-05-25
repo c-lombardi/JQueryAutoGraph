@@ -1,0 +1,275 @@
+<html style="width:100%">
+<head>
+	<title>Christopher Lombardi's Javascript Assignment</title>
+	<style>
+form {}
+.box {width:200px;height:30px;background-color:black;}
+.labelBox {width:200px; height:30px;text-align:center;}
+</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+<span id="errorMessage"></span>
+<input type="text" id="newColorText" placeholder="enter new color here..."></input>
+<button onclick="addColor();">Add Color</button>
+<table>
+	<tr>
+		<td>
+			Label1:<input type="text" id="label1Text"></input>
+			<select class="colorSelect" id="label1Color">
+			</select>
+			<form>
+				Value:<input type="radio" name="label1Radio" value="1">1</input>
+				<input type="radio" name="label1Radio" value="2">2</input>
+				<input type="radio" name="label1Radio" value="3">3</input>
+				<input type="radio" name="label1Radio" value="4">4</input>
+				<input type="radio" name="label1Radio" value="5">5</input>
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Label2:<input type="text" id="label2Text"></input>
+			<select class="colorSelect" id="label2Color">
+			</select>
+			<form>
+				Value:<input type="radio" name="label2Radio" value="1">1</input>
+				<input type="radio" name="label2Radio" value="2">2</input>
+				<input type="radio" name="label2Radio" value="3">3</input>
+				<input type="radio" name="label2Radio" value="4">4</input>
+				<input type="radio" name="label2Radio" value="5">5</input>
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Label3:<input type="text" id="label3Text"></input>
+			<select class="colorSelect" id="label3Color">
+			</select>
+			<form>
+				Value:<input type="radio" name="label3Radio" value="1">1</input>
+				<input type="radio" name="label3Radio" value="2">2</input>
+				<input type="radio" name="label3Radio" value="3">3</input>
+				<input type="radio" name="label3Radio" value="4">4</input>
+				<input type="radio" name="label3Radio" value="5">5</input>
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Label4:<input type="text" id="label4Text"></input>
+			<select class="colorSelect" id="label4Color">
+			</select>
+			<form>
+				Value:<input type="radio" name="label4Radio" value="1">1</input>
+				<input type="radio" name="label4Radio" value="2">2</input>
+				<input type="radio" name="label4Radio" value="3">3</input>
+				<input type="radio" name="label4Radio" value="4">4</input>
+				<input type="radio" name="label4Radio" value="5">5</input>
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Label5:<input type="text" id="label5Text"></input>
+			<select class="colorSelect" id="label5Color">
+			</select>
+			<form>
+				Value:<input type="radio" name="label5Radio" value="1">1</input>
+				<input type="radio" name="label5Radio" value="2">2</input>
+				<input type="radio" name="label5Radio" value="3">3</input>
+				<input type="radio" name="label5Radio" value="4">4</input>
+				<input type="radio" name="label5Radio" value="5">5</input>
+			</form>
+		</td>
+	</tr>
+</table>
+<button onclick="reset();">Reset</button>
+	<table id="mainTable">
+	</table>
+</body>
+</html>
+<script>
+    var label1Val = 0;
+    var label2Val = 0;
+    var label3Val = 0;
+    var label4Val = 0;
+    var label5Val = 0;
+    var colorArray = ["Red", "Blue", "Green", "Orange"];
+    $(document).ready(function () {
+        populateColorSelect();
+        makeTable();
+        resetColor(1);
+        resetColor(2);
+        resetColor(3);
+        resetColor(4);
+        resetColor(5);
+    });
+    $("#label1Text").change(function () {
+        var text = $(this).val();
+        $("#label1Box").text(text);
+    });
+    $("#label2Text").change(function () {
+        var text = $(this).val();
+        $("#label2Box").text(text);
+    });
+    $("#label3Text").change(function () {
+        var text = $(this).val();
+        $("#label3Box").text(text);
+    });
+    $("#label4Text").change(function () {
+        var text = $(this).val();
+        $("#label4Box").text(text);
+    });
+    $("#label5Text").change(function () {
+        var text = $(this).val();
+        $("#label5Box").text(text);
+    });
+    $("#label1Color").change(function () {
+        resetColor(1);
+        var color = $("#label1Color").val();
+        for (var i = 0; i < label1Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 1);
+            td.css("background-color", color);
+        }
+    });
+    $("#label2Color").change(function () {
+        resetColor(2);
+        var color = $("#label2Color").val();
+        for (var i = 0; i < label2Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 2);
+            td.css("background-color", color);
+        }
+    });
+    $("#label3Color").change(function () {
+        resetColor(3);
+        var color = $("#label3Color").val();
+        for (var i = 0; i < label3Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 3);
+            td.css("background-color", color);
+        }
+    });
+    $("#label4Color").change(function () {
+        resetColor(4);
+        var color = $("#label4Color").val();
+        for (var i = 0; i < label4Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 4);
+            td.css("background-color", color);
+        }
+    });
+    $("#label5Color").change(function () {
+        resetColor(5);
+        var color = $("#label5Color").val();
+        for (var i = 0; i < label5Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 5);
+            td.css("background-color", color);
+        }
+    });
+    $("input[name='label1Radio']:radio").change(function () {
+        label1Val = parseInt($(this).val());
+        resetColor(1);
+        var color = $("#label1Color").val();
+        for (var i = 0; i < label1Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 1);
+            td.css("background-color", color);
+        }
+    });
+    $("input[name='label2Radio']:radio").change(function () {
+        label2Val = parseInt($(this).val());
+        resetColor(2);
+        var color = $("#label2Color").val();
+        for (var i = 0; i < label2Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 2);
+            td.css("background-color", color);
+        }
+    });
+    $("input[name='label3Radio']:radio").change(function () {
+        label3Val = parseInt($(this).val());
+        resetColor(3);
+        var color = $("#label3Color").val();
+        for (var i = 0; i < label3Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 3);
+            td.css("background-color", color);
+        }
+    });
+    $("input[name='label4Radio']:radio").change(function () {
+        label4Val = parseInt($(this).val());
+        resetColor(4);
+        var color = $("#label4Color").val();
+        for (var i = 0; i < label4Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 4);
+            td.css("background-color", color);
+        }
+    });
+    $("input[name='label5Radio']:radio").change(function () {
+        label5Val = parseInt($(this).val());
+        resetColor(5);
+        var color = $("#label5Color").val();
+        for (var i = 0; i < label5Val + 1; i++) {
+            var td = $("tr#" + i).find("td." + 5);
+            td.css("background-color", color);
+        }
+    });
+    function populateColorSelect() {
+        for (var j = 1; j < 6; j++) {
+            var color = $("#label" + j + "Color").val();
+            $("#label" + j + "Color option").remove();
+            for (var i = 0; i < colorArray.length; i++) {
+                $('#label' + j + 'Color')
+                .append($("<option></option>")
+                .attr("value", colorArray[i])
+                .text(colorArray[i]));
+            }
+            $("#label" + j + "Color").val(color);
+        }
+    }
+    function addColor() {
+        var newColor = $("#newColorText").val();
+        $("#newColorText").val("");
+        if (newColor.indexOf(" ") < 0) {
+            var length = colorArray.push(newColor);
+            populateColorSelect();
+        }
+        else {
+            $("#errorMessage").val("Please enter a valid color");
+        }
+    };
+    function makeTable() {
+        reset();
+        for (var i = 5; i > 0; i--) {
+            $("#mainTable").append($("<tr id='" + i + "'></tr>").append("<td>" + i + "</td>"));
+            for (var j = 1; j < 6; j++) {
+                $("tr#" + i).append("<td class='box " + j + "'></td>");
+            }
+        };
+
+        $("#mainTable").append("<tr><td></td><td id='label1Box' class='labelBox' >" + $('#label1Text').val() + "</td><td id='label2Box' class='labelBox' >" + $('#label2Text').val() + "</td><td id='label3Box'  class='labelBox' >" + $('#label3Text').val() + "</td><td id='label4Box' class='labelBox' >" + $('#label4Text').val() + "</td><td id='label5Box' class='labelBox' >" + $('#label5Text').val() + "</td></tr>");
+    };
+    function reset() {
+        $('.colorSelect').val("Red").prop('selected', true);
+        //$("#mainTable tr").remove();
+        $("#label1Text").val("");
+        $("#label2Text").val("");
+        $("#label3Text").val("");
+        $("#label4Text").val("");
+        $("#label5Text").val("");
+        $("input:radio").each(function () {
+            $(this).prop('checked', false);
+        });
+        for (var i = 1; i < 6; i++) {
+            $("#label" + i + "Box").val("");
+        }
+        $(".box").css("background-color", "white");
+        label1Val = 0;
+        label2Val = 0;
+        label3Val = 0;
+        label4Val = 0;
+        label5Val = 0;
+    };
+    function resetColor(columnNum) {
+        for (var i = 1; i <= columnNum; i++) {
+            var td = $("td." + columnNum);
+            td.css("background-color", "white");
+        }
+    };
+</script>
